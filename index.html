@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZENITH 2K26 — Freshers Party</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #070913;
+      --bg-card: rgba(16, 21, 42, 0.82);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --gold: #f5b942;
+      --gold-bright: #ffd97d;
+      --violet: #7c5cff;
+      --cyan: #22d3ee;
+      --emerald: #10b981;
+      --rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(124, 92, 255, 0.24), transparent 42%),
+        radial-gradient(circle at 85% 20%, rgba(245, 185, 66, 0.20), transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(34, 211, 238, 0.14), transparent 50%),
+        var(--bg-deep);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 16px 14px;
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 680px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Step Progress Indicator */
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      background: rgba(15, 20, 40, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 10px;
+      backdrop-filter: blur(14px);
+    }
+
+    .step-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 6px;
+      border-radius: 11px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+      text-align: center;
+    }
+
+    .step-pill.active {
+      color: #090c18;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      box-shadow: 0 6px 20px rgba(245, 185, 66, 0.35);
+    }
+
+    .step-pill.done {
+      color: var(--gold-bright);
+      background: rgba(245, 185, 66, 0.12);
+      border-color: rgba(245, 185, 66, 0.3);
+    }
+
+    /* Main Card */
+    .page-card {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 34px 28px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+      animation: fadeSlideUp 0.35s ease;
+    }
+
+    .page-card.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Page 1: Welcome Banner */
+    .welcome-banner {
+      text-align: center;
+      padding: 18px 8px;
+    }
+
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: rgba(124, 92, 255, 0.18);
+      border: 1px solid rgba(124, 92, 255, 0.45);
+      color: #c4b5fd;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(2.3rem, 7vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #ffffff 0%, var(--gold-bright) 52%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 14px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.8vw, 1.25rem);
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 12px;
+    }
+
+    .hero-copy {
+      max-width: 500px;
+      margin: 0 auto 28px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* Typography & Form Controls */
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.5rem, 4vw, 2.05rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      background: rgba(7, 10, 24, 0.85);
+      border: 1.5px solid rgba(148, 163, 184, 0.28);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .text-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(245, 185, 66, 0.16);
+    }
+
+    .text-input::placeholder {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* Sample Roll Numbers Box */
+    .sample-box {
+      background: rgba(124, 92, 255, 0.1);
+      border: 1px solid rgba(124, 92, 255, 0.32);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    .sample-header {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #c4b5fd;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .sample-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sample-chip {
+      background: rgba(7, 10, 24, 0.78);
+      border: 1px solid rgba(245, 185, 66, 0.38);
+      color: var(--gold-bright);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sample-chip:hover {
+      background: rgba(245, 185, 66, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Matched Student Banner */
+    .student-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 18px;
+      font-size: 0.88rem;
+      color: #a7f3d0;
+    }
+
+    .student-banner.visible {
+      display: flex;
+    }
+
+    /* Meal Selector */
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .meal-option {
+      cursor: pointer;
+      border-radius: 16px;
+      padding: 16px;
+      background: rgba(7, 10, 24, 0.78);
+      border: 1.5px solid rgba(148, 163, 184, 0.25);
+      transition: all 0.22s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+    }
+
+    .meal-option:hover {
+      border-color: rgba(245, 185, 66, 0.55);
+    }
+
+    .meal-option.selected-veg {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: var(--emerald);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+    }
+
+    .meal-option.selected-nonveg {
+      background: rgba(244, 63, 94, 0.16);
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.16);
+    }
+
+    .meal-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border: 2px solid currentColor;
+    }
+
+    .meal-dot.veg {
+      color: var(--emerald);
+    }
+
+    .meal-dot.veg::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    .meal-dot.nonveg {
+      color: var(--rose);
+    }
+
+    .meal-dot.nonveg::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--rose);
+    }
+
+    .meal-title {
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: #ffffff;
+    }
+
+    .meal-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Alert / Error Box */
+    .alert-box {
+      display: none;
+      background: rgba(244, 63, 94, 0.14);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      color: #fecdd3;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .alert-box.visible {
+      display: block;
+    }
+
+    .inline-link-btn {
+      background: none;
+      border: none;
+      color: var(--gold-bright);
+      font-weight: 800;
+      text-decoration: underline;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      margin-left: 6px;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 15px 24px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      color: #090c18;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(245, 185, 66, 0.3);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(245, 185, 66, 0.42);
+    }
+
+    .btn-secondary {
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Page 4: Pamphlet / Poster Preview */
+    .pamphlet-poster {
+      position: relative;
+      border-radius: 22px;
+      padding: 28px 24px;
+      background:
+        radial-gradient(circle at top right, rgba(245, 185, 66, 0.24), transparent 46%),
+        radial-gradient(circle at bottom left, rgba(124, 92, 255, 0.28), transparent 50%),
+        linear-gradient(155deg, #111833 0%, #0b1024 55%, #16102e 100%);
+      border: 1.5px solid rgba(245, 185, 66, 0.52);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 50px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .pamphlet-badge {
+      display: inline-block;
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: rgba(245, 185, 66, 0.16);
+      border: 1px solid rgba(245, 185, 66, 0.45);
+      color: var(--gold-bright);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .pamphlet-event {
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 2.55rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .pamphlet-tagline {
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .pamphlet-student-box {
+      background: rgba(7, 10, 24, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+
+    .pamphlet-student-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+    }
+
+    .pamphlet-student-roll {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      letter-spacing: 0.04em;
+    }
+
+    .pamphlet-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .pamphlet-meta-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 13px;
+      padding: 11px 12px;
+    }
+
+    .pamphlet-meta-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .pamphlet-meta-value {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .pamphlet-footer-note {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      border-top: 1px dashed rgba(255, 255, 255, 0.16);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Watermark on every page */
+    .page-watermark {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(148, 163, 184, 0.65);
+      user-select: none;
+    }
+
+    @media (max-width: 540px) {
+      .page-card {
+        padding: 24px 18px;
+      }
+      .meal-grid,
+      .pamphlet-meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .step-pill {
+        font-size: 0.68rem;
+        padding: 7px 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- 4-Step Progress Bar -->
+    <nav class="stepper" aria-label="Registration Steps">
+      <div class="step-pill active" id="pill-1">1. Welcome</div>
+      <div class="step-pill" id="pill-2">2. Full Name</div>
+      <div class="step-pill" id="pill-3">3. Roll &amp; Meal</div>
+      <div class="step-pill" id="pill-4">4. Poster</div>
+    </nav>
+
+    <!-- PAGE 1: ZENITH 2K26 Welcome (No date or venue shown on front page) -->
+    <section class="page-card active" id="page-1">
+      <div class="welcome-banner">
+        <div class="tag-chip">Freshers Party Celebration</div>
+        <h1 class="hero-title">ZENITH 2K26</h1>
+        <p class="hero-subtitle">Warmest Welcome to the Incoming Batch!</p>
+        <p class="hero-copy">
+          Step into a celebration of new beginnings, friendships, music, and memories.
+          Enter your details to verify your registration, pick your dining preference,
+          and download your personalized welcome poster.
+        </p>
+        <button type="button" class="btn-primary" onclick="goToPage(2)">
+          Get Started &rarr;
+        </button>
+      </div>
+      <div class="page-watermark">@ajee</div>
+    </section>
+
+    <!-- PAGE 2: Mandatory Full Name -->
+    <section class="page-card" id="page-2">
+      <div class="section-eyebrow">Step 02 &bull; Student Identity</div>
+      <h2 class="section-title">Enter Your Full Name</h2>
+      <p class="section-desc">
+        Full name is mandatory. Minor spelling variations are tolerated when matched with your roll number.
+      </p>
+
+      <div class="field-group">
+        <label class="field-label" for="fullNameInput">Full Name <span style="color: var(--gold);">*</span></label>
+        <input
+          type="text"
+          id="fullNameInput"
+          class="text-input"
+          placeholder="e.g., PRASANT PATRA"
+          autocomplete="name"
+        />
+      </div>
+
+      <div class="alert-box" id="nameErrorBox"></div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-secondary" onclick="goToPage(1)">&larr; Back</button>
+        <button type="button" class="btn-primary" onclick="handleNameNext()">Continue to Roll No &rarr;</button>
+      </div>
+      <div class="page-watermark">@ajee</div>
+    </section>
+
+    <!-- PAGE 3: Roll Number Verification + Veg / Non-Veg Selection -->
+    <section class="page-card" id="page-3">
+      <div class="section-eyebrow">Step 03 &bull; Verification &amp; Dining</div>
+      <h2 class="section-title">Verify Roll No &amp; Select Meal</h2>
+      <p class="section-desc">
+        Enter your roll number to verify it against the student database and match your name, then choose Veg or Non-Veg.
+      </p>
+
+      <!-- Sample Roll Numbers at Top of Roll No Section -->
+      <div class="sample-box">
+        <div class="sample-header">
+          <span>Sample Roll Numbers (click to fill):</span>
+        </div>
+        <div class="sample-chips">
+          <button type="button" class="sample-chip" onclick="applySampleRoll('BC26-001')">BC26-001</button>
+          <button type="button" class="sample-chip" onclick="applySampleRoll('COM(AEDP)26-001')">COM(AEDP)26-001</button>
+          <button type="button" class="sample-chip" onclick="applySampleRoll('IC26-001')">IC26-001</button>
+        </div>
+      </div>
+
+      <div class="student-banner" id="activeNameBanner">
+        <div>
+          Entered Name: <strong id="displayEnteredName" style="color: #ffffff;"></strong>
+        </div>
+        <button type="button" class="inline-link-btn" onclick="goToPage(2)">Edit Name</button>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="rollNoInput">Roll Number <span style="color: var(--gold);">*</span></label>
+        <input
+          type="text"
+          id="rollNoInput"
+          class="text-input"
+          placeholder="e.g., BC26-001 or COM(AEDP)26-001"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="field-group">
+        <span class="field-label">Dining Preference <span style="color: var(--gold);">*</span></span>
+        <div class="meal-grid">
+          <div class="meal-option" id="meal-veg" onclick="selectMeal('Veg')">
+            <div class="meal-dot veg"></div>
+            <div>
+              <div class="meal-title">Veg</div>
+              <div class="meal-sub">Pure Vegetarian Pass</div>
+            </div>
+          </div>
+          <div class="meal-option" id="meal-nonveg" onclick="selectMeal('Non-Veg')">
+            <div class="meal-dot nonveg"></div>
+            <div>
+              <div class="meal-title">Non-Veg</div>
+              <div class="meal-sub">Non-Vegetarian Pass</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-box" id="verifyErrorBox"></div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-secondary" onclick="goToPage(2)">&larr; Back</button>
+        <button type="button" class="btn-primary" onclick="handleVerifyAndGenerate()">Verify &amp; Create Poster &rarr;</button>
+      </div>
+      <div class="page-watermark">@ajee</div>
+    </section>
+
+    <!-- PAGE 4: Welcome Poster / Pamphlet with Download Option -->
+    <section class="page-card" id="page-4">
+      <div class="section-eyebrow">Step 04 &bull; Welcome Pamphlet &amp; Poster</div>
+      <h2 class="section-title">Your ZENITH 2K26 Pass</h2>
+      <p class="section-desc">
+        Verification complete! Here is your official welcome pamphlet and poster ready to download.
+      </p>
+
+      <div class="pamphlet-poster" id="posterPreview">
+        <div class="pamphlet-badge">Official Fresher Welcome Pass</div>
+        <div class="pamphlet-event">ZENITH 2K26</div>
+        <div class="pamphlet-tagline">Celebrating New Beginnings &amp; Freshers Festivities</div>
+
+        <div class="pamphlet-student-box">
+          <div class="pamphlet-student-name" id="posterName">STUDENT NAME</div>
+          <div class="pamphlet-student-roll" id="posterRoll">Roll No: BC26-001</div>
+        </div>
+
+        <div class="pamphlet-meta-grid">
+          <div class="pamphlet-meta-card">
+            <div class="pamphlet-meta-label">Date</div>
+            <div class="pamphlet-meta-value">11 Dec</div>
+          </div>
+          <div class="pamphlet-meta-card">
+            <div class="pamphlet-meta-label">Venue</div>
+            <div class="pamphlet-meta-value">Conference Hall</div>
+          </div>
+          <div class="pamphlet-meta-card">
+            <div class="pamphlet-meta-label">Dining</div>
+            <div class="pamphlet-meta-value" id="posterMeal">Veg</div>
+          </div>
+        </div>
+
+        <div class="pamphlet-footer-note">
+          <span>Welcome to the family — enjoy the celebration!</span>
+          <span style="font-weight: 700; color: var(--gold-bright);">@ajee</span>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-secondary" onclick="goToPage(3)">&larr; Edit Details</button>
+        <button type="button" class="btn-primary" onclick="downloadPosterPNG()">Download Poster (PNG)</button>
+      </div>
+      <div class="page-watermark">@ajee</div>
+    </section>
+  </div>
+
+  <script>
+    const STUDENT_DB = [
+      { roll: "BC24-001", name: "JAGANNATH GOUDA" },
+      { roll: "BC24-002", name: "PRASANTA MUNI" },
+      { roll: "BC24-003", name: "SAGAR GOUDA" },
+      { roll: "BC24-004", name: "SIPUN KUMAR BISOYI" },
+      { roll: "BC24-005", name: "SAHIL PRADHAN" },
+      { roll: "BC24-007", name: "SANGRAM GOUDA" },
+      { roll: "BC24-008", name: "SHIBANANDA BARIK" },
+      { roll: "BC24-009", name: "ASISH KUMAR PRADHAN" },
+      { roll: "BC24-010", name: "SATYAM MAHAKUD" },
+      { roll: "BC24-011", name: "OM SAI RAM SWAIN" },
+      { roll: "BC24-012", name: "NIHAR KANTA PRADHAN" },
+      { roll: "BC24-013", name: "BHUPESH RANASINGH" },
+      { roll: "BC24-014", name: "ROHIT KUMAR RAUTA" },
+      { roll: "BC24-015", name: "CHANDAN PANIGRAHI" },
+      { roll: "BC24-016", name: "SUNIL PATRA" },
+      { roll: "BC24-017", name: "BADAL SWAIN" },
+      { roll: "BC24-018", name: "SRUTISIKHA SWAIN" },
+      { roll: "BC24-019", name: "BACHAN KUMAR MANDAL" },
+      { roll: "BC24-020", name: "RUDRAPRASAD JENA" },
+      { roll: "BC24-021", name: "AJAYA JENA" },
+      { roll: "BC24-022", name: "CH.SURYAM PATRO" },
+      { roll: "BC24-023", name: "LIZA RANI BEHERA" },
+      { roll: "BC24-024", name: "ARGHYARUPA SADANGI" },
+      { roll: "BC24-025", name: "SHRADDHARANI NAYAK" },
+      { roll: "BC24-026", name: "BAIJAYANTIMALA PRADHAN" },
+      { roll: "BC24-027", name: "NILAMADHAB GOUDA" },
+      { roll: "BC24-028", name: "LATIMA MALLICK" },
+      { roll: "BC24-029", name: "JYOTI PRADHAN" },
+      { roll: "BC24-030", name: "SHALINI SWAIN" },
+      { roll: "BC24-031", name: "PRASAD MAHARANA" },
+      { roll: "BC24-032", name: "JYOTIRMAYEE MOHAPATRA" },
+      { roll: "BC24-033", name: "SUJIT SWAIN" },
+      { roll: "BC24-034", name: "RAJALAXMI APATA" },
+      { roll: "BC24-035", name: "JASHMIN APATA" },
+      { roll: "BC24-036", name: "SARATHI NAYAK" },
+      { roll: "BC24-037", name: "A SUBHAM KUMAR PATRO" },
+      { roll: "BC24-038", name: "CH.GOPAL KRUSHNA SUBUDHI" },
+      { roll: "BC24-039", name: "VAISHNAVI" },
+      { roll: "BC24-040", name: "BRAJASHREE SWAIN" },
+      { roll: "BC24-041", name: "RUPAK BEHERA" },
+      { roll: "BC24-043", name: "SIDHANT MALLICK" },
+      { roll: "BC24-044", name: "DEEPAK SETHI" },
+      { roll: "BC24-045", name: "DEEPAK KUMAR ROUT" },
+      { roll: "BC24-046", name: "SANGHAMITRA PRADHAN" },
+      { roll: "BC24-047", name: "SANTOSINI GOUDA" },
+      { roll: "BC24-049", name: "MOHIT CHAUHAN" },
+
+      { roll: "BC25-001", name: "K. SUBHAM PATRA" },
+      { roll: "BC25-002", name: "RAJESWARI SAHU" },
+      { roll: "BC25-003", name: "K.CHANDAN SUBUDHI" },
+      { roll: "BC25-004", name: "KANHU CHARAN BEHERA" },
+      { roll: "BC25-005", name: "KARTIKESWAR NAIK" },
+      { roll: "BC25-006", name: "SUMAN GOUDA" },
+      { roll: "BC25-008", name: "PUSPANJALIBISOYI" },
+      { roll: "BC25-009", name: "DEEPEKA APATA" },
+      { roll: "BC25-010", name: "RAHULA PRADHAN" },
+      { roll: "BC25-011", name: "RAJKUMAR DWIBEDI" },
+      { roll: "BC25-012", name: "PRIYAM PATTNAYAK" },
+      { roll: "BC25-013", name: "P YOGESH PATRO" },
+      { roll: "BC25-014", name: "BISWAJIT RANA" },
+      { roll: "BC25-015", name: "SMRUTI NAYAK" },
+      { roll: "BC25-016", name: "SUBHANKAR PATTNAIK" },
+      { roll: "BC25-017", name: "BADAL SWAIN" },
+      { roll: "BC25-018", name: "OMM PRADHAN" },
+      { roll: "BC25-019", name: "MIRABAI NAYAK" },
+      { roll: "BC25-020", name: "PRIYANTA SWAIN" },
+      { roll: "BC25-021", name: "CH TARUN KUMAR SUBUDHI" },
+      { roll: "BC25-022", name: "RAMESWARI NAYAK" },
+      { roll: "BC25-023", name: "PAPU GOUDA" },
+      { roll: "BC25-024", name: "DEEPAK GOUDA" },
+      { roll: "BC25-025", name: "PREMSAI SUBUDHI" },
+      { roll: "BC25-026", name: "SMITARANI BARIK" },
+      { roll: "BC25-028", name: "ANURAG DIGAL" },
+      { roll: "BC25-029", name: "PARTHASARATHI BISOYI" },
+      { roll: "BC25-030", name: "BIKRAM SAHU" },
+      { roll: "BC25-031", name: "OM PRAKASH GOUDA" },
+      { roll: "BC25-032", name: "ANANDA SWAIN" },
+      { roll: "BC25-033", name: "NILAMADHAB GOUDA" },
+      { roll: "BC25-034", name: "JAGADISH RAUTA" },
+      { roll: "BC25-035", name: "SANTOSH GOUDA" },
+      { roll: "BC25-036", name: "LUCKY PRASAD NAYAK" },
+      { roll: "BC25-037", name: "HARIOMM PANIGRAHI" },
+      { roll: "BC25-038", name: "SRABANI BALARAM PAWAR" },
+      { roll: "BC25-039", name: "GYANENDRA DIGAL" },
+      { roll: "BC25-040", name: "SANSKRUTI PALO" },
+      { roll: "BC25-041", name: "RABINDRA KUMAR DAKUA" },
+      { roll: "BC25-044", name: "CH. PRABHASH KUMAR PATRO" },
+      { roll: "BC25-045", name: "MIKI GOUDA" },
+      { roll: "BC25-047", name: "RANVEER NAYAK" },
+      { roll: "BC25-048", name: "KETAKI MALLIK" },
+
+      { roll: "BC26-001", name: "PRASANT PATRA" },
+      { roll: "BC26-003", name: "SUPRABHAT PRADHAN" },
+      { roll: "BC26-004", name: "MANASH SAHU" },
+
+      { roll: "COM(AEDP)26-001", name: "SWASTIKA MISHRA" },
+      { roll: "COM(AEDP)26-002", name: "PRANAYA KUMAR PRADHAN" },
+      { roll: "COM(AEDP)26-003", name: "SAISANKAR PRADHAN" },
+      { roll: "COM(AEDP)26-004", name: "RAGHUNATH PADHY" },
+      { roll: "COM(AEDP)26-005", name: "SRICHANDAN TRIPATHY" },
+      { roll: "COM(AEDP)26-006", name: "AMAN BISOYI" },
+      { roll: "COM(AEDP)26-007", name: "DIPAK NAIK" },
+      { roll: "COM(AEDP)26-008", name: "RAHUL GOUDA" },
+      { roll: "COM(AEDP)26-009", name: "SUPRIYA SWAIN" },
+      { roll: "COM(AEDP)26-010", name: "JITENDRA KUMAR BEHERA" },
+      { roll: "COM(AEDP)26-011", name: "ARPIT RAJ JENA" },
+      { roll: "COM(AEDP)26-012", name: "SAHIL ROUT" },
+      { roll: "COM(AEDP)26-013", name: "BABUL NAYAK" },
+      { roll: "COM(AEDP)26-014", name: "ASHOK POLLEYI" },
+      { roll: "COM(AEDP)26-015", name: "RAMESWAR MISHRA" },
+      { roll: "COM(AEDP)26-016", name: "BADAL GOUDA" },
+      { roll: "COM(AEDP)26-017", name: "D BHABANI PRASAD" },
+      { roll: "COM(AEDP)26-018", name: "ASISH DASH" },
+      { roll: "COM(AEDP)26-019", name: "SUBHAM PRADHAN" },
+      { roll: "COM(AEDP)26-020", name: "CHINU GOUDA" },
+      { roll: "COM(AEDP)26-021", name: "MOUSUMI GOUDA" },
+      { roll: "COM(AEDP)26-022", name: "MANISA GOUDA" },
+      { roll: "COM(AEDP)26-023", name: "BAISAKHI GOUDA" },
+      { roll: "COM(AEDP)26-024", name: "SUBHAM GOUDA" },
+      { roll: "COM(AEDP)26-025", name: "SIBARAM GOUDA" },
+      { roll: "COM(AEDP)26-026", name: "PRATICHI PRIYADARSHINI" },
+      { roll: "COM(AEDP)26-027", name: "NILESH NAYAK" },
+      { roll: "COM(AEDP)26-028", name: "ADITYA PRASAD PANDA" },
+      { roll: "COM(AEDP)26-029", name: "ASHUTOSH BISOYI" },
+      { roll: "COM(AEDP)26-030", name: "SRIDHAR SAHU" },
+      { roll: "COM(AEDP)26-031", name: "ARAB PRADHAN" },
+      { roll: "COM(AEDP)26-032", name: "KAJALA SAHU" },
+      { roll: "COM(AEDP)26-033", name: "AKASH BISOYI" },
+      { roll: "COM(AEDP)26-034", name: "NABAGHAN PRADHAN" },
+      { roll: "COM(AEDP)26-035", name: "SUBHAM BARADA" },
+      { roll: "COM(AEDP)26-036", name: "AKASH PRADHAN" },
+      { roll: "COM(AEDP)26-037", name: "BADAL NAYAK" },
+      { roll: "COM(AEDP)26-038", name: "BABU NAYAK" },
+      { roll: "COM(AEDP)26-039", name: "SAIMAN BISOYI" },
+      { roll: "COM(AEDP)26-040", name: "BHAKTABATCHAL NAIK" },
+      { roll: "COM(AEDP)26-041", name: "P. OMPRIYA RAO" },
+      { roll: "COM(AEDP)26-042", name: "S.SAI PRASADA PRUSTY" },
+      { roll: "COM(AEDP)26-043", name: "SUNIL SAHU" },
+      { roll: "COM(AEDP)26-044", name: "N CHIDANANDA CHOUDHURY" },
+      { roll: "COM(AEDP)26-045", name: "SUNKURU BINAYAK PATRO" },
+      { roll: "COM(AEDP)26-046", name: "BISWAJEET GOUDA" },
+      { roll: "COM(AEDP)26-047", name: "MADHABI NAYAK" },
+      { roll: "COM(AEDP)26-048", name: "JAGANATH RAUTA" },
+      { roll: "COM(AEDP)26-049", name: "SUNIL SWAIN" },
+      { roll: "COM(AEDP)26-051", name: "T SURYA PATRA" },
+      { roll: "COM(AEDP)26-056", name: "ALIP PRADHAN" },
+
+      { roll: "IC25-001", name: "LIPSA PRIYADARSINI PRADHAN" },
+      { roll: "IC25-002", name: "OM PRADHAN" },
+      { roll: "IC25-003", name: "ALOK BEHERA" },
+      { roll: "IC25-004", name: "SUBHAM NAIK" },
+      { roll: "IC25-005", name: "SAIRAM BADATYA" },
+      { roll: "IC25-007", name: "MANAS KUMAR PATRA" },
+      { roll: "IC25-008", name: "KRISH PRADHAN" },
+      { roll: "IC25-009", name: "NANDINI NAYAK" },
+      { roll: "IC25-010", name: "MANAMOHAN POLAI" },
+      { roll: "IC25-011", name: "ALOK KUMAR PARIDA" },
+      { roll: "IC25-012", name: "AMBIKA BISOYI" },
+      { roll: "IC25-013", name: "KRISH BISHOYI" },
+      { roll: "IC25-014", name: "BINOD KUMAR GOUDA" },
+      { roll: "IC25-015", name: "ROMIT BISOYI" },
+      { roll: "IC25-016", name: "SUBHASREE GOUDA" },
+      { roll: "IC25-017", name: "SIBANI GOUDA" },
+      { roll: "IC25-018", name: "SAGAR NAYAK" },
+      { roll: "IC25-019", name: "SUBHAM NAIK" },
+      { roll: "IC25-020", name: "AADINATH BALARAM PAWAR" },
+      { roll: "IC25-021", name: "SIBANI NAYAK" },
+      { roll: "IC25-022", name: "MRUTUNJAY MALIK" },
+      { roll: "IC25-023", name: "BAI PRASAD PADHY" },
+      { roll: "IC25-024", name: "K. HANSHARAJ ACHARY" },
+      { roll: "IC25-025", name: "SRABANA BEHERA" },
+      { roll: "IC25-026", name: "D AKHILESH" },
+      { roll: "IC25-027", name: "S RITESH KUMAR PATRA" },
+      { roll: "IC25-028", name: "RABINARAYAN BEHERA" },
+      { roll: "IC25-029", name: "AHMAD RAZA KHAN" },
+      { roll: "IC25-030", name: "K AKSHITA SUBUDHI" },
+      { roll: "IC25-031", name: "SUBHASHREE PRADHAN" },
+      { roll: "IC25-032", name: "HARDIK PRADHAN" },
+      { roll: "IC25-033", name: "ITISHREE GOUDA" },
+      { roll: "IC25-034", name: "CHANDRA KANTA GOUDA" },
+
+      { roll: "IC26-001", name: "SAHIR PATRA" },
+      { roll: "IC26-003", name: "PARITOSH PATRO" },
+      { roll: "IC26-004", name: "PAPU GURU" },
+      { roll: "IC26-005", name: "RAHUL BISOYI" },
+      { roll: "IC26-006", name: "SANDHYA SWAIN" },
+      { roll: "IC26-007", name: "SUBHANKAR BEHERA" },
+      { roll: "IC26-008", name: "JUGALJYOTI SWAIN" },
+      { roll: "IC26-009", name: "SAMRUDHI JENA" },
+      { roll: "IC26-010", name: "SNEHALATA MALIK" },
+      { roll: "IC26-011", name: "ROSHAN KUMAR GOUDA" },
+      { roll: "IC26-012", name: "SUBHRANSHU GOUDA" },
+      { roll: "IC26-013", name: "NEHA BHUYAN" },
+      { roll: "IC26-014", name: "SUBHAM JENA" },
+      { roll: "IC26-016", name: "SUBHAM GOUDA" },
+      { roll: "IC26-017", name: "RITESH KUMAR MALIKA" },
+      { roll: "IC26-018", name: "PRIYANSHU RANA" },
+      { roll: "IC26-019", name: "SOHAN GOUDA" },
+      { roll: "IC26-020", name: "LISI BEHERA" }
+    ];
+
+    let state = {
+      fullName: "",
+      rollNo: "",
+      meal: "",
+      matchedStudent: null
+    };
+
+    function normalizeRoll(val) {
+      return (val || "").trim().replace(/\s+/g, "").toUpperCase();
+    }
+
+    function normalizeName(val) {
+      return (val || "")
+        .toLowerCase()
+        .replace(/[^a-z\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function levenshteinDistance(a, b) {
+      const m = a.length;
+      const n = b.length;
+      const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+          dp[i][j] = Math.min(
+            dp[i - 1][j] + 1,
+            dp[i][j - 1] + 1,
+            dp[i - 1][j - 1] + cost
+          );
+        }
+      }
+      return dp[m][n];
+    }
+
+    function isNameMatchWithMinorError(enteredName, dbName) {
+      const eNorm = normalizeName(enteredName);
+      const dNorm = normalizeName(dbName);
+      if (!eNorm || !dNorm) return false;
+      if (eNorm === dNorm) return true;
+
+      const eCompact = eNorm.replace(/\s+/g, "");
+      const dCompact = dNorm.replace(/\s+/g, "");
+      const distCompact = levenshteinDistance(eCompact, dCompact);
+      const maxLenCompact = Math.max(eCompact.length, dCompact.length);
+      const maxAllowedErrors = maxLenCompact <= 7 ? 1 : maxLenCompact <= 14 ? 2 : 3;
+
+      if (distCompact <= maxAllowedErrors) {
+        return true;
+      }
+
+      // Check token-level minor errors (e.g., first/last name entered with slight typo)
+      const eTokens = eNorm.split(" ").filter(Boolean);
+      const dTokens = dNorm.split(" ").filter(Boolean);
+
+      if (eTokens.length === 1 && eTokens[0].length >= 4) {
+        return dTokens.some((dt) => {
+          const allow = dt.length <= 5 ? 1 : 2;
+          return levenshteinDistance(eTokens[0], dt) <= allow;
+        });
+      }
+
+      if (eTokens.length > 1 && eTokens.length <= dTokens.length) {
+        let matchedTokens = 0;
+        for (const et of eTokens) {
+          const ok = dTokens.some((dt) => {
+            const allow = dt.length <= 5 ? 1 : 2;
+            return levenshteinDistance(et, dt) <= allow;
+          });
+          if (ok) matchedTokens++;
+        }
+        return matchedTokens === eTokens.length;
+      }
+
+      return false;
+    }
+
+    function goToPage(pageNum) {
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById("page-" + i).classList.toggle("active", i === pageNum);
+        const pill = document.getElementById("pill-" + i);
+        pill.classList.remove("active", "done");
+        if (i < pageNum) pill.classList.add("done");
+        if (i === pageNum) pill.classList.add("active");
+      }
+
+      if (pageNum === 3) {
+        document.getElementById("displayEnteredName").textContent = state.fullName;
+        hideAlert("verifyErrorBox");
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showAlert(id, htmlMessage) {
+      const box = document.getElementById(id);
+      box.innerHTML = htmlMessage;
+      box.classList.add("visible");
+    }
+
+    function hideAlert(id) {
+      const box = document.getElementById(id);
+      box.innerHTML = "";
+      box.classList.remove("visible");
+    }
+
+    function handleNameNext() {
+      const raw = document.getElementById("fullNameInput").value.trim();
+      if (!raw) {
+        showAlert("nameErrorBox", "Full name is mandatory. Please enter your full name before continuing.");
+        return;
+      }
+      hideAlert("nameErrorBox");
+      state.fullName = raw;
+      goToPage(3);
+    }
+
+    function applySampleRoll(sample) {
+      document.getElementById("rollNoInput").value = sample;
+      hideAlert("verifyErrorBox");
+    }
+
+    function selectMeal(choice) {
+      state.meal = choice;
+      document.getElementById("meal-veg").classList.toggle("selected-veg", choice === "Veg");
+      document.getElementById("meal-nonveg").classList.toggle("selected-nonveg", choice === "Non-Veg");
+      hideAlert("verifyErrorBox");
+    }
+
+    function handleVerifyAndGenerate() {
+      const rawName = document.getElementById("fullNameInput").value.trim();
+      if (!rawName) {
+        goToPage(2);
+        showAlert("nameErrorBox", "Full name is mandatory. Please enter your full name first.");
+        return;
+      }
+      state.fullName = rawName;
+
+      const rawRoll = document.getElementById("rollNoInput").value.trim();
+      const normRoll = normalizeRoll(rawRoll);
+
+      if (!normRoll) {
+        showAlert("verifyErrorBox", "Please enter your Roll Number to verify against the database.");
+        return;
+      }
+
+      const studentRecord = STUDENT_DB.find((item) => normalizeRoll(item.roll) === normRoll);
+      if (!studentRecord) {
+        showAlert(
+          "verifyErrorBox",
+          `Roll number <strong>${escapeHtml(rawRoll.toUpperCase())}</strong> was not found in the database. Please check your roll number or try a sample roll number above.`
+        );
+        return;
+      }
+
+      if (!isNameMatchWithMinorError(state.fullName, studentRecord.name)) {
+        showAlert(
+          "verifyErrorBox",
+          `The entered name <strong>${escapeHtml(state.fullName)}</strong> does not match the record for roll number <strong>${escapeHtml(studentRecord.roll)}</strong>. Please update your name or roll number to proceed.` +
+            `<button type="button" class="inline-link-btn" onclick="goToPage(2)">Change Name</button>`
+        );
+        return;
+      }
+
+      if (!state.meal) {
+        showAlert("verifyErrorBox", "Please select either <strong>Veg</strong> or <strong>Non-Veg</strong> before generating your poster.");
+        return;
+      }
+
+      hideAlert("verifyErrorBox");
+      state.rollNo = studentRecord.roll;
+      state.matchedStudent = studentRecord;
+
+      document.getElementById("posterName").textContent = studentRecord.name;
+      document.getElementById("posterRoll").textContent = `Roll No: ${studentRecord.roll}`;
+      document.getElementById("posterMeal").textContent = state.meal;
+
+      goToPage(4);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function downloadPosterPNG() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1350;
+      const ctx = canvas.getContext("2d");
+
+      // Background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      bgGrad.addColorStop(0, "#0b1024");
+      bgGrad.addColorStop(0.55, "#131b3a");
+      bgGrad.addColorStop(1, "#1c1238");
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Decorative radial glows
+      const glow1 = ctx.createRadialGradient(880, 220, 20, 880, 220, 420);
+      glow1.addColorStop(0, "rgba(245, 185, 66, 0.28)");
+      glow1.addColorStop(1, "rgba(245, 185, 66, 0)");
+      ctx.fillStyle = glow1;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const glow2 = ctx.createRadialGradient(200, 1120, 20, 200, 1120, 460);
+      glow2.addColorStop(0, "rgba(124, 92, 255, 0.30)");
+      glow2.addColorStop(1, "rgba(124, 92, 255, 0)");
+      ctx.fillStyle = glow2;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Outer golden border
+      ctx.strokeStyle = "rgba(245, 185, 66, 0.65)";
+      ctx.lineWidth = 4;
+      roundRect(ctx, 44, 44, canvas.width - 88, canvas.height - 88, 36);
+      ctx.stroke();
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+      ctx.lineWidth = 2;
+      roundRect(ctx, 60, 60, canvas.width - 120, canvas.height - 120, 28);
+      ctx.stroke();
+
+      // Badge pill
+      ctx.fillStyle = "rgba(245, 185, 66, 0.18)";
+      roundRect(ctx, 320, 125, 440, 54, 27);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(245, 185, 66, 0.55)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = "#ffd97d";
+      ctx.font = "800 20px 'Plus Jakarta Sans', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("OFFICIAL FRESHERS WELCOME PAMPHLET", canvas.width / 2, 160);
+
+      // Main Title
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 84px 'Cinzel', Georgia, serif";
+      ctx.fillText("ZENITH 2K26", canvas.width / 2, 285);
+
+      ctx.fillStyle = "#cbd5e1";
+      ctx.font = "600 28px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("Freshers Party & New Batch Celebration", canvas.width / 2, 342);
+
+      // Divider
+      ctx.strokeStyle = "rgba(245, 185, 66, 0.35)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(180, 395);
+      ctx.lineTo(canvas.width - 180, 395);
+      ctx.stroke();
+
+      // Student Details Card
+      ctx.fillStyle = "rgba(7, 10, 24, 0.72)";
+      roundRect(ctx, 110, 440, canvas.width - 220, 230, 26);
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "700 18px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("VERIFIED FRESHERS PASS FOR", canvas.width / 2, 495);
+
+      const displayName = (state.matchedStudent && state.matchedStudent.name) || state.fullName || "STUDENT";
+      ctx.fillStyle = "#ffd97d";
+      ctx.font = "800 44px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(displayName, canvas.width / 2, 560);
+
+      ctx.fillStyle = "#f8fafc";
+      ctx.font = "700 28px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText(`Roll No: ${state.rollNo || ""}`, canvas.width / 2, 622);
+
+      // Event Info Boxes (Date: 11 Dec, Venue: Conference Hall, Dining: Veg/Non-Veg)
+      const boxes = [
+        { label: "DATE", value: "11 Dec" },
+        { label: "VENUE", value: "Conference Hall" },
+        { label: "DINING", value: state.meal || "Veg" }
+      ];
+
+      const startX = 110;
+      const gap = 22;
+      const boxW = (canvas.width - 220 - gap * 2) / 3;
+      const boxY = 720;
+      const boxH = 175;
+
+      boxes.forEach((b, idx) => {
+        const bx = startX + idx * (boxW + gap);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+        roundRect(ctx, bx, boxY, boxW, boxH, 20);
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "700 17px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(b.label, bx + boxW / 2, boxY + 58);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "800 27px 'Plus Jakarta Sans', sans-serif";
+        ctx.fillText(b.value, bx + boxW / 2, boxY + 115);
+      });
+
+      // Welcome Note
+      ctx.fillStyle = "#e2e8f0";
+      ctx.font = "600 25px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("Welcome to the family — wishing you an unforgettable day!", canvas.width / 2, 985);
+
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "500 21px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("Present this poster at the Conference Hall entrance.", canvas.width / 2, 1030);
+
+      // Watermark at bottom
+      ctx.fillStyle = "rgba(255, 217, 125, 0.85)";
+      ctx.font = "700 24px 'Plus Jakarta Sans', sans-serif";
+      ctx.fillText("@ajee", canvas.width / 2, 1245);
+
+      const link = document.createElement("a");
+      const safeRoll = (state.rollNo || "ZENITH2K26").replace(/[^a-zA-Z0-9_-]/g, "_");
+      link.download = `ZENITH_2K26_${safeRoll}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + width, y, x + width, y + height, radius);
+      ctx.arcTo(x + width, y + height, x, y + height, radius);
+      ctx.arcTo(x, y + height, x, y, radius);
+      ctx.arcTo(x, y, x + width, y, radius);
+      ctx.closePath();
+    }
+  </script>
+</body>
+</html>
